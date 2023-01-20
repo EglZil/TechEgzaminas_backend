@@ -1,5 +1,7 @@
 package lt.tehcin.myProject.api.dto;
 
+import lt.tehcin.myProject.model.Record;
+
 import java.util.Objects;
 
 public class CommentEntityDto extends CommentDto{
@@ -9,8 +11,8 @@ public class CommentEntityDto extends CommentDto{
     public CommentEntityDto() {
     }
 
-    public CommentEntityDto(String author, String comment, Long id) {
-        super(author, comment);
+    public CommentEntityDto(String author, String comment, Record record, Long id) {
+        super(author, comment, record);
         this.id = id;
     }
 

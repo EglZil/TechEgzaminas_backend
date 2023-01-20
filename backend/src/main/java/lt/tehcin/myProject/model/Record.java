@@ -7,6 +7,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -20,9 +21,8 @@ public class Record {
 
     private String description;
 
-//    @ManyToOne
-//    @JoinColumn(name = "comment_id")
-//    private Comment comment;
+    @OneToMany(mappedBy = "comment")
+    private List<Comment> comments;
 
     @CreatedDate
     private LocalDateTime createdDate;
@@ -109,14 +109,13 @@ public class Record {
         this.modifiedBy = modifiedBy;
     }
 
-//    public Comment getComment() {
-//        return comment;
-//    }
-//
-//    public void setComment(Comment comment) {
-//        this.comment = comment;
-//    }
+    public List<Comment> getComments() {
+        return comments;
+    }
 
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
     @Override
     public boolean equals(Object o) {

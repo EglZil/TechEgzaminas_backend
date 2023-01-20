@@ -11,6 +11,7 @@ public class CommentMapper {
 
         commentDto.setAuthor(comment.getAuthor());
         commentDto.setComment(comment.getComment());
+        commentDto.setRecord(comment.getRecord());
 
         return commentDto;
     }
@@ -21,6 +22,7 @@ public class CommentMapper {
         commentEntityDto.setId(comment.getId());
         commentEntityDto.setAuthor(comment.getAuthor());
         commentEntityDto.setComment(comment.getComment());
+        commentEntityDto.setRecord(comment.getRecord());
 
         return commentEntityDto;
     }
@@ -30,6 +32,7 @@ public class CommentMapper {
 
         comment.setAuthor(commentDto.getAuthor());
         comment.setComment(commentDto.getComment());
+        comment.setRecord(commentDto.getRecord());
 
         return comment;
     }
@@ -40,6 +43,7 @@ public class CommentMapper {
         comment.setId(commentEntityDto.getId());
         comment.setAuthor(commentEntityDto.getAuthor());
         comment.setComment(commentEntityDto.getComment());
+        comment.setRecord(commentEntityDto.getRecord());
 
         return comment;
     }

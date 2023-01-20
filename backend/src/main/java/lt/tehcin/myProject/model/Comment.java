@@ -20,6 +20,10 @@ public class Comment {
 
     private String comment;
 
+    @ManyToOne
+    @JoinColumn(name = "record_id")
+    private Record record;
+
     @CreatedDate
     private LocalDateTime createdDate;
 
@@ -105,16 +109,24 @@ public class Comment {
         this.modifiedBy = modifiedBy;
     }
 
+    public Record getRecord() {
+        return record;
+    }
+
+    public void setRecord(Record record) {
+        this.record = record;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Comment comment1 = (Comment) o;
-        return Objects.equals(id, comment1.id) && Objects.equals(author, comment1.author) && Objects.equals(comment, comment1.comment) && Objects.equals(createdDate, comment1.createdDate) && Objects.equals(modifiedDate, comment1.modifiedDate) && Objects.equals(createdBy, comment1.createdBy) && Objects.equals(modifiedBy, comment1.modifiedBy);
+        return Objects.equals(id, comment1.id) && Objects.equals(author, comment1.author) && Objects.equals(comment, comment1.comment) && Objects.equals(record, comment1.record) && Objects.equals(createdDate, comment1.createdDate) && Objects.equals(modifiedDate, comment1.modifiedDate) && Objects.equals(createdBy, comment1.createdBy) && Objects.equals(modifiedBy, comment1.modifiedBy);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, author, comment, createdDate, modifiedDate, createdBy, modifiedBy);
+        return Objects.hash(id, author, comment, record, createdDate, modifiedDate, createdBy, modifiedBy);
     }
 }

@@ -1,7 +1,9 @@
 package lt.tehcin.myProject.service;
 
 import lt.tehcin.myProject.dao.CommentRepository;
+import lt.tehcin.myProject.dao.RecordRepository;
 import lt.tehcin.myProject.model.Comment;
+import lt.tehcin.myProject.model.Record;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +14,13 @@ import java.util.Optional;
 public class CommentService {
 
     private final CommentRepository commentRepository;
+    private final RecordRepository recordRepository;
 
     //    @Autowired
-    public CommentService(CommentRepository commentRepository) {
+    public CommentService(CommentRepository commentRepository,
+                          RecordRepository recordRepository) {
         this.commentRepository = commentRepository;
+        this.recordRepository = recordRepository;
     }
 
     public List<Comment> getAll() {
@@ -49,6 +54,17 @@ public class CommentService {
 
         existingComment.setAuthor(comment.getAuthor());
         existingComment.setComment(comment.getComment());
+
+        return commentRepository.save(existingComment);
+    }
+
+    public Comment addRecordToComment(Long commentId, Long recordId) {
+        var existingComment = commentRepository.findById(commentId)
+                .orElseThrow();
+
+        var existingRecord = recordRepository.findById(recordId).orElseThrow();
+
+        existingComment.setRecord(existingRecord);
 
         return commentRepository.save(existingComment);
     }
