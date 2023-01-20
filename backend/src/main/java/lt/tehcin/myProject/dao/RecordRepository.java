@@ -1,9 +1,10 @@
 package lt.tehcin.myProject.dao;
 
-import lt.tehcin.myProject.model.BookStore;
+import lt.tehcin.myProject.model.Record;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BookStoreRepository extends JpaRepository<BookStore, Long> {
+public interface RecordRepository extends JpaRepository<Record, Long> {
+
 }

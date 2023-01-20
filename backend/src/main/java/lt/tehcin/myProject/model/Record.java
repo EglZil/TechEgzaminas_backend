@@ -9,27 +9,16 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-import static javax.persistence.EnumType.STRING;
-
 @Entity
-public class Book {
+public class Record {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String author;
-
     private String name;
 
     private String description;
-
-//    @Enumerated(STRING)
-    private BookType bookType;
-
-    @ManyToOne
-    @JoinColumn(name = "bookStore_id")
-    private BookStore bookStore;
 
     @CreatedDate
     private LocalDateTime createdDate;
@@ -57,7 +46,7 @@ public class Book {
         modifiedBy = "API app";
     }
 
-    public Book() {
+    public Record() {
     }
 
     public Long getId() {
@@ -66,14 +55,6 @@ public class Book {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
     }
 
     public String getName() {
@@ -90,14 +71,6 @@ public class Book {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public BookStore getBookStore() {
-        return bookStore;
-    }
-
-    public void setBookStore(BookStore bookStore) {
-        this.bookStore = bookStore;
     }
 
     public LocalDateTime getCreatedDate() {
@@ -132,24 +105,16 @@ public class Book {
         this.modifiedBy = modifiedBy;
     }
 
-    public BookType getBookType() {
-        return bookType;
-    }
-
-    public void setBookType(BookType bookType) {
-        this.bookType = bookType;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Book book = (Book) o;
-        return Objects.equals(id, book.id) && Objects.equals(author, book.author) && Objects.equals(name, book.name) && Objects.equals(description, book.description) && bookType == book.bookType && Objects.equals(bookStore, book.bookStore) && Objects.equals(createdDate, book.createdDate) && Objects.equals(modifiedDate, book.modifiedDate) && Objects.equals(createdBy, book.createdBy) && Objects.equals(modifiedBy, book.modifiedBy);
+        Record record = (Record) o;
+        return Objects.equals(id, record.id) && Objects.equals(name, record.name) && Objects.equals(description, record.description) && Objects.equals(createdDate, record.createdDate) && Objects.equals(modifiedDate, record.modifiedDate) && Objects.equals(createdBy, record.createdBy) && Objects.equals(modifiedBy, record.modifiedBy);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, author, name, description, bookType, bookStore, createdDate, modifiedDate, createdBy, modifiedBy);
+        return Objects.hash(id, name, description, createdDate, modifiedDate, createdBy, modifiedBy);
     }
 }

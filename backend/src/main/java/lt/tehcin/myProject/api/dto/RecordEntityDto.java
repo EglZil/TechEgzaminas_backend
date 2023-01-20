@@ -2,15 +2,15 @@ package lt.tehcin.myProject.api.dto;
 
 import java.util.Objects;
 
-public class BookStoreEntityDto extends BookStoreDto{
+public class RecordEntityDto extends RecordDto {
 
     private Long id;
 
-    public BookStoreEntityDto() {
+    public RecordEntityDto() {
     }
 
-    public BookStoreEntityDto(String name, Long id) {
-        super(name);
+    public RecordEntityDto(String name, String description, Long id) {
+        super(name, description);
         this.id = id;
     }
 
@@ -27,12 +27,19 @@ public class BookStoreEntityDto extends BookStoreDto{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        BookStoreEntityDto that = (BookStoreEntityDto) o;
+        RecordEntityDto that = (RecordEntityDto) o;
         return Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), id);
+    }
+
+    @Override
+    public String toString() {
+        return "BookEntityDto{" +
+                "id=" + id +
+                '}';
     }
 }
