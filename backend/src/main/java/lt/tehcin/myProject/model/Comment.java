@@ -10,19 +10,15 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
-public class Record {
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String author;
 
-    private String description;
-
-//    @ManyToOne
-//    @JoinColumn(name = "comment_id")
-//    private Comment comment;
+    private String comment;
 
     @CreatedDate
     private LocalDateTime createdDate;
@@ -50,7 +46,7 @@ public class Record {
         modifiedBy = "API app";
     }
 
-    public Record() {
+    public Comment() {
     }
 
     public Long getId() {
@@ -61,20 +57,20 @@ public class Record {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
-    public String getDescription() {
-        return description;
+    public String getComment() {
+        return comment;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public LocalDateTime getCreatedDate() {
@@ -109,25 +105,16 @@ public class Record {
         this.modifiedBy = modifiedBy;
     }
 
-//    public Comment getComment() {
-//        return comment;
-//    }
-//
-//    public void setComment(Comment comment) {
-//        this.comment = comment;
-//    }
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Record record = (Record) o;
-        return Objects.equals(id, record.id) && Objects.equals(name, record.name) && Objects.equals(description, record.description) && Objects.equals(createdDate, record.createdDate) && Objects.equals(modifiedDate, record.modifiedDate) && Objects.equals(createdBy, record.createdBy) && Objects.equals(modifiedBy, record.modifiedBy);
+        Comment comment1 = (Comment) o;
+        return Objects.equals(id, comment1.id) && Objects.equals(author, comment1.author) && Objects.equals(comment, comment1.comment) && Objects.equals(createdDate, comment1.createdDate) && Objects.equals(modifiedDate, comment1.modifiedDate) && Objects.equals(createdBy, comment1.createdBy) && Objects.equals(modifiedBy, comment1.modifiedBy);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, createdDate, modifiedDate, createdBy, modifiedBy);
+        return Objects.hash(id, author, comment, createdDate, modifiedDate, createdBy, modifiedBy);
     }
 }
