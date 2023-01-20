@@ -23,8 +23,8 @@ public class Record {
 
     private String description;
 
-    @OneToMany(mappedBy = "comment")
-    private List<Comment> comments;
+//    @OneToMany(mappedBy = "comment")
+//    private List<Comment> comments;
 
     @CreatedDate
     private LocalDateTime createdDate;
@@ -111,13 +111,14 @@ public class Record {
         this.modifiedBy = modifiedBy;
     }
 
-    public List<Comment> getComments() {
-        return comments;
-    }
+//    public List<Comment> getComments() {
+//        return comments;
+//    }
+//
+//    public void setComments(List<Comment> comments) {
+//        this.comments = comments;
+//    }
 
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
 
     @Override
     public boolean equals(Object o) {
