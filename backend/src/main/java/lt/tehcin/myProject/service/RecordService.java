@@ -6,6 +6,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -35,7 +36,21 @@ public class RecordService {
         }
     }
 
+    //    public Record create(Record record) {
+//            return recordRepository.save(record);
+//    }
+
     public Record create(Record record) {
+        List<Record> records = this.getAll();
+        String name = record.getName().toLowerCase();
+        boolean exists = false;
+//        Record exists = records.stream().filter(r -> r.getName().toLowerCase().equals(name)).findFirst().orElseThrow();
+
+        for(Record recorded : records) {
+            if(recorded.getName().toLowerCase().equals(name)) {
+                throw new IllegalArgumentException();
+            }
+        }
         return recordRepository.save(record);
     }
 

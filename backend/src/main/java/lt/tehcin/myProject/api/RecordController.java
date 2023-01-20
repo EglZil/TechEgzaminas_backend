@@ -9,8 +9,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -19,6 +21,7 @@ import static lt.tehcin.myProject.api.dto.mapper.RecordMapper.toRecordDto;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
+@Validated
 @RequestMapping("/api/v1/records")
 public class RecordController {
 
@@ -55,9 +58,10 @@ public class RecordController {
         }
     }
 
-    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<RecordDto> createRecord(@RequestBody RecordDto recordDto) {
+    @PostMapping
+    public ResponseEntity<RecordDto> createRoom(@Valid @RequestBody RecordDto recordDto) {
         var createdRecord = recordService.create(toRecord(recordDto));
+
         return ok(toRecordDto(createdRecord));
     }
 
