@@ -35,7 +35,8 @@ public class RecordController {
 
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<RecordEntityDto> getRecords() {
-        return recordService.getAll().stream().map(RecordMapper::toRecordEntityDto).collect(toList());
+        return recordService.getAllByDate().stream().map(RecordMapper::toRecordEntityDto).collect(toList());
+
     }
 
     @GetMapping(value = "/{recordId}", produces = {MediaType.APPLICATION_JSON_VALUE})

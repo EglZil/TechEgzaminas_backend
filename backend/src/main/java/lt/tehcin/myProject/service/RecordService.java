@@ -24,6 +24,10 @@ public class RecordService {
         return recordRepository.findAll();
     }
 
+    public List<Record> getAllByDate() {
+        return recordRepository.findAllByOrderByCreatedDateDesc();
+    }
+
     public Optional<Record> getById(Long id) {
         return recordRepository.findById(id);
     }
@@ -37,15 +41,9 @@ public class RecordService {
         }
     }
 
-    //    public Record create(Record record) {
-//            return recordRepository.save(record);
-//    }
-
     public Record create(Record record) {
         List<Record> records = this.getAll();
         String name = record.getName().toLowerCase();
-        boolean exists = false;
-//        Record exists = records.stream().filter(r -> r.getName().toLowerCase().equals(name)).findFirst().orElseThrow();
 
         for(Record recorded : records) {
             if(recorded.getName().toLowerCase().equals(name)) {
@@ -69,13 +67,5 @@ public class RecordService {
         return recordRepository.save(existingRecord);
     }
 
-//    @PostConstruct
-//    public void loadInitialBooks() {
-//        var initialBooksToLoad = List.of(
-//                new BookDto("Sabaliauskaite", "Silva Rerum", "knyga", BookType.ROMANCE, null),
-//                new BookDto("Orvel", "Animal Farm", "good book", BookType.FANTASY, null)
-//        );
-//
-//        initialBooksToLoad.stream().map(BookMapper::toBook).forEach(bookRepository::save);
-//    }
+
 }
