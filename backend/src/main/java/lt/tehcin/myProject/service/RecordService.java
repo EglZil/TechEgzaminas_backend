@@ -1,6 +1,7 @@
 package lt.tehcin.myProject.service;
 
 import lt.tehcin.myProject.dao.RecordRepository;
+import lt.tehcin.myProject.exception.RecordValidationException;
 import lt.tehcin.myProject.model.Record;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -48,7 +49,7 @@ public class RecordService {
 
         for(Record recorded : records) {
             if(recorded.getName().toLowerCase().equals(name)) {
-                throw new IllegalArgumentException();
+                throw new RecordValidationException();
             }
         }
         return recordRepository.save(record);

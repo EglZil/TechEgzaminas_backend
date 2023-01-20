@@ -59,7 +59,7 @@ public class RecordController {
     }
 
     @PostMapping
-    public ResponseEntity<RecordDto> createRoom(@Valid @RequestBody RecordDto recordDto) {
+    public ResponseEntity<RecordDto> createRecord(@Valid @RequestBody RecordDto recordDto) {
         var createdRecord = recordService.create(toRecord(recordDto));
 
         return ok(toRecordDto(createdRecord));
