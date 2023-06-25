@@ -1,5 +1,7 @@
 package lt.tehcin.myProject.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -23,13 +25,16 @@ public class Record {
 
     private String description;
 
-//    @OneToMany(mappedBy = "comment")
-//    private List<Comment> comments;
+    @JsonIgnore
+    @OneToMany(mappedBy = "record", cascade = CascadeType.ALL)
+    private List<Comment> comments;
 
     @CreatedDate
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdDate;
 
     @LastModifiedDate
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime modifiedDate;
 
     @CreatedBy
@@ -53,6 +58,15 @@ public class Record {
     }
 
     public Record() {
+
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     public Long getId() {
@@ -111,25 +125,16 @@ public class Record {
         this.modifiedBy = modifiedBy;
     }
 
-//    public List<Comment> getComments() {
-//        return comments;
-//    }
-//
-//    public void setComments(List<Comment> comments) {
-//        this.comments = comments;
-//    }
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Record record = (Record) o;
-        return Objects.equals(id, record.id) && Objects.equals(name, record.name) && Objects.equals(description, record.description) && Objects.equals(createdDate, record.createdDate) && Objects.equals(modifiedDate, record.modifiedDate) && Objects.equals(createdBy, record.createdBy) && Objects.equals(modifiedBy, record.modifiedBy);
+        return Objects.equals(id, record.id) && Objects.equals(name, record.name) && Objects.equals(description, record.description) && Objects.equals(comments, record.comments) && Objects.equals(createdDate, record.createdDate) && Objects.equals(modifiedDate, record.modifiedDate) && Objects.equals(createdBy, record.createdBy) && Objects.equals(modifiedBy, record.modifiedBy);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, createdDate, modifiedDate, createdBy, modifiedBy);
+        return Objects.hash(id, name, description, comments, createdDate, modifiedDate, createdBy, modifiedBy);
     }
 }

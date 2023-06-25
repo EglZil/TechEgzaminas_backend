@@ -58,24 +58,9 @@ public class CommentService {
         return commentRepository.save(existingComment);
     }
 
-    public Comment addRecordToComment(Long commentId, Long recordId) {
-        var existingComment = commentRepository.findById(commentId)
-                .orElseThrow();
-
-        var existingRecord = recordRepository.findById(recordId).orElseThrow();
-
-        existingComment.setRecord(existingRecord);
-
-        return commentRepository.save(existingComment);
+    public List<Comment> getAllByRecordId(Long recordId) {
+        return commentRepository.findCommentsByRecordId(recordId);
     }
 
-//    @PostConstruct
-//    public void loadInitialBooks() {
-//        var initialBooksToLoad = List.of(
-//                new BookDto("Sabaliauskaite", "Silva Rerum", "knyga", BookType.ROMANCE, null),
-//                new BookDto("Orvel", "Animal Farm", "good book", BookType.FANTASY, null)
-//        );
-//
-//        initialBooksToLoad.stream().map(BookMapper::toBook).forEach(bookRepository::save);
-//    }
+
 }

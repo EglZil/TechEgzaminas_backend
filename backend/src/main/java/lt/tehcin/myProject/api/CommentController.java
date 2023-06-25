@@ -19,7 +19,7 @@ import static lt.tehcin.myProject.api.dto.mapper.CommentMapper.toCommentDto;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
-@RequestMapping("/api/v1/comments")
+@RequestMapping("/api/v1/records/")
 public class CommentController {
 
     public Logger logger = LoggerFactory.getLogger(CommentController.class);
@@ -30,12 +30,12 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(value="comments", produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<CommentEntityDto> getComments() {
         return commentService.getAll().stream().map(CommentMapper::toCommentEntityDto).collect(toList());
     }
 
-    @GetMapping(value = "/{commentId}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(value = "comment/{commentId}", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<Comment> getComment(@PathVariable Long commentId) {
         var commentOptional = commentService.getById(commentId);
 
@@ -44,16 +44,21 @@ public class CommentController {
         return responseEntity;
     }
 
-    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping(value="comments", consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<CommentDto> createComment(@RequestBody CommentDto commentDto) {
         var createdComment = commentService.create(toComment(commentDto));
         return ok(toCommentDto(createdComment));
     }
 
-    @PostMapping("/{commentId}/addToRecord")
-    @ResponseBody
-    public Comment addRecordToComment(@PathVariable Long commentId, @RequestParam Long recordId) {
-        return commentService.addRecordToComment(commentId, recordId);
+    @GetMapping(value="comments/{recordId}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public List<CommentEntityDto> getCommentsByRecordId(@PathVariable Long recordId) {
+        return commentService.getAllByRecordId(recordId).stream().map(CommentMapper::toCommentEntityDto).collect(toList());
+    }
+
+    @DeleteMapping(value="comment/{commentId}")
+    public ResponseEntity<Boolean> deleteComment(@PathVariable Long commentId) {
+        var isDeleted = commentService.deleteById(commentId);
+        return ok(isDeleted);
     }
 
 }

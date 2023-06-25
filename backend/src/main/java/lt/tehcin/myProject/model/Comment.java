@@ -1,5 +1,6 @@
 package lt.tehcin.myProject.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -28,9 +29,11 @@ public class Comment {
     private LocalDateTime createdDate;
 
     @LastModifiedDate
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime modifiedDate;
 
     @CreatedBy
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private String createdBy;
 
     @LastModifiedBy
